@@ -1,0 +1,12 @@
+[project]
+name = "langbud"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "google-generativeai>=0.7.2",
+    "langgraph>=0.2.15",
+    "python-dotenv>=1.0.1",
+    "streamlit>=1.38.0",
+]
