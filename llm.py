@@ -15,7 +15,13 @@ class GeminiInterface:
             self.model = genai.GenerativeModel(model_name)
 
     def set_system_prompt(self, prompt):
-        self.model = genai.GenerativeModel(model_name=self.model_name, system_prompt=prompt)
+        self.model = genai.GenerativeModel(model_name=self.model_name, system_instruction=prompt)
+
+    def streamify(self, iterator):
+        def iterator_func():
+            for item in iterator:
+                yield item.text
+        return iterator_func
 
     def generate(self, prompt, stream=True):
         '''
@@ -23,8 +29,11 @@ class GeminiInterface:
                 for resp in gemini.generate("What is the meaning of life?"):
                     print(resp.text)
         '''
-        return self.model.generate_content(prompt, stream=stream)
-    
+        if stream:
+            return self.streamify(self.model.generate_content(prompt, stream=stream))
+        else:
+            return self.model.generate_content(prompt, stream=False)
+
     def send_messages(self, messages: dict, stream: bool=True):
         '''
             Send messages (history + current message)
@@ -41,7 +50,6 @@ class GeminiInterface:
         '''
         chat = self.model.start_chat(history=messages[:-1])
         return chat.send_message(messages[-1], stream=stream)
-
 
 if __name__ == '__main__':
     gemini = GeminiInterface()
