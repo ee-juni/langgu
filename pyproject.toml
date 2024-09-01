@@ -1,7 +1,7 @@
 [project]
 name = "LangGu"
 version = "0.1.0"
-description = "Add your description here"
+description = "LangGu helps you with your journey of acquiring a new language."
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [

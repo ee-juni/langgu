@@ -438,25 +438,6 @@ wheels = [
 ]
 
 [[package]]
-name = "langbud"
-version = "0.1.0"
-source = { virtual = "." }
-dependencies = [
-    { name = "google-generativeai" },
-    { name = "langgraph" },
-    { name = "python-dotenv" },
-    { name = "streamlit" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "google-generativeai", specifier = ">=0.7.2" },
-    { name = "langgraph", specifier = ">=0.2.15" },
-    { name = "python-dotenv", specifier = ">=1.0.1" },
-    { name = "streamlit", specifier = ">=1.38.0" },
-]
-
-[[package]]
 name = "langchain-core"
 version = "0.2.37"
 source = { registry = "https://pypi.org/simple" }
@@ -497,6 +478,25 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/b9/98/06eb81be32d251e6b2465b94b6f79acc7654b9c7ac5e233ac639b959ca2b/langgraph_checkpoint-1.0.8.tar.gz", hash = "sha256:a528009d4ccebfd24da550fc8ccdd4de0a3c1077f30e2fcd32bddca4c9237e7f", size = 14465 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/48/9a/575eae07aae62c6995ce813cf49ef42e74508374452f1b7b43327372ec8a/langgraph_checkpoint-1.0.8-py3-none-any.whl", hash = "sha256:6eb2fa615e9a53d5a4181d0a189ecc76b87cd1d5613e17121d2779755d2e566c", size = 15855 },
+]
+
+[[package]]
+name = "langgu"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "google-generativeai" },
+    { name = "langgraph" },
+    { name = "python-dotenv" },
+    { name = "streamlit" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "google-generativeai", specifier = ">=0.7.2" },
+    { name = "langgraph", specifier = ">=0.2.15" },
+    { name = "python-dotenv", specifier = ">=1.0.1" },
+    { name = "streamlit", specifier = ">=1.38.0" },
 ]
 
 [[package]]
