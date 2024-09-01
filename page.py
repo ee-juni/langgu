@@ -3,7 +3,7 @@ from llm import GeminiInterface
 
 # Page configuration
 st.set_page_config(
-    page_title="LangBud",
+    page_title="LangGu",
     page_icon="👋",
     layout="wide",
     initial_sidebar_state="expanded")
@@ -25,7 +25,7 @@ if "messages" not in st.session_state:
     st.session_state.messages = [{"role": "ai", "parts": "문장을 입력해주시면 변역, 첨삭, 설명 등을 알아서 해드릴게요!"}]
 
 # Page content
-st.title("LangBud: Your All-In-One Language Buddy")
+st.title("LangGu: Your All-In-One Language Buddy")
 
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
