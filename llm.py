@@ -20,7 +20,10 @@ class GeminiInterface:
     def streamify(self, iterator):
         def iterator_func():
             for item in iterator:
-                yield item.text
+                if 'text' in dict(item):
+                    yield item.text
+                else:
+                    yield ""
         return iterator_func
 
     def generate(self, prompt, stream=True):
