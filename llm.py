@@ -20,9 +20,9 @@ class GeminiInterface:
     def streamify(self, iterator):
         def iterator_func():
             for item in iterator:
-                if 'text' in dict(item):
+                try:
                     yield item.text
-                else:
+                except:
                     yield ""
         return iterator_func
 

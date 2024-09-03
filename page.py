@@ -12,7 +12,7 @@ st.set_page_config(
 # Session state configuration
 if "lang_config" not in st.session_state:
     with open("lang_config.json") as f:
-        st.session_state.lang_config = json.load(f)['KOR-JAP']
+        st.session_state.lang_config = json.load(f)['ENG-JAP']
 if "llm" not in st.session_state:
     st.session_state.llm = GeminiInterface(system_prompt=st.session_state.lang_config['system_prompt'])
 if "messages" not in st.session_state:

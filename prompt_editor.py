@@ -44,22 +44,18 @@ def __(d, mo, sel_lang):
 
 @app.cell
 def __(d, fn, inp_msg, inp_sys, json, mo, sel_lang):
-    def modify_json():
+    def modify_json(_):
         d[sel_lang.value] = {
             "system_prompt": inp_sys.value,
             "starting_message": inp_msg.value
         }
         with open(fn, "w") as f:
-            json.dump(d)
+            json.dump(d, f)
+        print("Saved modified prompt!")
 
     save_edits = mo.ui.button(on_click=modify_json, label="Save modified prompt")
     save_edits
     return modify_json, save_edits
-
-
-@app.cell
-def __():
-    return
 
 
 @app.cell
