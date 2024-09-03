@@ -10,16 +10,28 @@ st.set_page_config(
     initial_sidebar_state="expanded")
 
 # Session state configuration
-if "lang_config" not in st.session_state:
+if "lang_config_json" not in st.session_state:
     with open("lang_config.json") as f:
-        st.session_state.lang_config = json.load(f)['ENG-JAP']
-if "llm" not in st.session_state:
+        st.session_state.lang_config_json = json.load(f)
+    st.session_state.sel_lang = list(st.session_state.lang_config_json.keys())[0]
+def set_lang_config():
+    st.session_state.lang_config = st.session_state.lang_config_json[st.session_state.sel_lang]
     st.session_state.llm = GeminiInterface(system_prompt=st.session_state.lang_config['system_prompt'])
-if "messages" not in st.session_state:
     st.session_state.messages = [{"role": "ai", "parts": st.session_state.lang_config['starting_message']}]
+if "lang_config" not in st.session_state:
+    set_lang_config()
 
 # Page content
-st.title("LangGu: Your All-In-One Language Buddy")
+with st.sidebar:
+    sel_lang = st.selectbox(
+        label="Language Configuration", 
+        options=st.session_state.lang_config_json.keys(), 
+        index=0, 
+        on_change=set_lang_config,
+        key="sel_lang"
+    )
+
+st.title("👋 LangGu: Your All-In-One Language Buddy")
 
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
