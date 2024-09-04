@@ -24,3 +24,9 @@ LangGu helps you with your journey of acquiring a new language.
 `uv run streamlit run page.py`
 ### 4. (Optional) Edit system prompt & welcome message
 `uv run marimo edit prompt_editor.py`
+
+---
+## Misc
+### Locking requirements
+Lock requirements defined in `pyproject.toml` to requirements.txt via
+```uv pip compile pyproject.toml -o requirements.txt```
