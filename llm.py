@@ -32,16 +32,18 @@ class GeminiInterface:
                 yield item.text
         return iterator_func
 
-    def generate(self, prompt, stream=True):
+    def generate(self, user_prompt, system_prompt=None, stream=True):
         '''
             # When streaming use as follows:
                 for resp in gemini.generate("What is the meaning of life?"):
                     print(resp.text)
         '''
+        if system_prompt:
+            self.set_system_prompt(system_prompt)
         if stream:
-            return self.streamify(self.model.generate_content(prompt, stream=stream, safety_settings=safety_settings))
+            return self.streamify(self.model.generate_content(user_prompt, stream=stream, safety_settings=safety_settings))
         else:
-            return self.model.generate_content(prompt, stream=False, safety_settings=safety_settings)
+            return self.model.generate_content(user_prompt, stream=False, safety_settings=safety_settings)
 
     def send_messages(self, messages: dict, stream: bool=True):
         '''
