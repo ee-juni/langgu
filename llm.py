@@ -13,7 +13,7 @@ safety_settings={
 
 # Interface for Gemini API
 class GeminiInterface:
-    def __init__(self, model_name: str='gemini-1.5-flash', system_prompt: str=None):
+    def __init__(self, model_name: str='gemini-1.5-pro', system_prompt: str=None):
         load_dotenv()
         genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
         self.model_name = model_name
