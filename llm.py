@@ -2,6 +2,15 @@ import google.generativeai as genai
 from dotenv import load_dotenv
 import os
 
+# Disable safety settings
+from google.generativeai.types import HarmCategory, HarmBlockThreshold
+safety_settings={
+    HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
+    HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
+    HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
+    HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE
+}
+
 # Interface for Gemini API
 class GeminiInterface:
     def __init__(self, model_name: str='gemini-1.5-flash', system_prompt: str=None):
@@ -20,10 +29,7 @@ class GeminiInterface:
     def streamify(self, iterator):
         def iterator_func():
             for item in iterator:
-                try:
-                    yield item.text
-                except:
-                    yield ""
+                yield item.text
         return iterator_func
 
     def generate(self, prompt, stream=True):
@@ -33,9 +39,9 @@ class GeminiInterface:
                     print(resp.text)
         '''
         if stream:
-            return self.streamify(self.model.generate_content(prompt, stream=stream))
+            return self.streamify(self.model.generate_content(prompt, stream=stream, safety_settings=safety_settings))
         else:
-            return self.model.generate_content(prompt, stream=False)
+            return self.model.generate_content(prompt, stream=False, safety_settings=safety_settings)
 
     def send_messages(self, messages: dict, stream: bool=True):
         '''
